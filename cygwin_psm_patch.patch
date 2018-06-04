@@ -1,0 +1,11 @@
+--- Delaunay_psm.cpp	2018-05-16 19:16:20.000000000 +0200
++++ Delaunay_psm_patched.cpp	2018-05-31 16:01:15.401105800 +0200
+@@ -7134,7 +7134,7 @@
+ 
+ #ifndef GEO_OS_ANDROID
+ #ifndef GEO_OS_EMSCRIPTEN
+-#include <execinfo.h>
++//#include <execinfo.h>
+ #endif
+ #endif
+ 
