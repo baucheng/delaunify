@@ -7,7 +7,7 @@ int main()
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(nullptr);
     
-    std::vector<double> delaunay_vertices;
+    std::vector<double> vertices_xy;
     int line_number = 1; // 1-based input line counting
     int error_count = 0;
     for (std::string line; std::getline(std::cin, line);)
@@ -17,8 +17,8 @@ int main()
         if (line_stream >> x >> y)
         {
             // Input coordinates parsed successfully
-            delaunay_vertices.push_back(x);
-            delaunay_vertices.push_back(y);
+            vertices_xy.push_back(x);
+            vertices_xy.push_back(y);
         }
         else
         {
@@ -36,10 +36,10 @@ int main()
     GEO::initialize();
     GEO::index_t num_dimensions = 2;
     GEO::Delaunay_var triangulation = GEO::Delaunay::create(GEO::coord_index_t(num_dimensions), "BDEL2d");
-    GEO::index_t num_points = delaunay_vertices.size() / num_dimensions;
+    GEO::index_t num_points = vertices_xy.size() / num_dimensions;
     
     //Actually perform the triangulation
-    triangulation->set_vertices(num_points, delaunay_vertices.data());
+    triangulation->set_vertices(num_points, vertices_xy.data());
     
     if (triangulation->nb_cells() == 0)
     {
