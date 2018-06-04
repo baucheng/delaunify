@@ -9,6 +9,7 @@ int main()
     
     std::vector<double> delaunay_vertices;
     int line_number = 1; // 1-based input line counting
+    int error_count = 0;
     for (std::string line; std::getline(std::cin, line);)
     {
         std::stringstream line_stream(line);
@@ -21,9 +22,15 @@ int main()
         }
         else
         {
-            std::cerr << "Error reading input line " << line_number << " as coordinates: " << line << std::endl;
+            error_count++;
+            std::cerr << "Error: could not read input line " << line_number << " as coordinates: \"" << line << "\"" << std::endl;
         }
         line_number++;
+    }
+    
+    if (error_count != 0)
+    {
+        std::cerr << "Warning: " << error_count << " input line(s) were not correctly read. Vertex indexing may be unpredictable." << std::endl;
     }
     
     GEO::initialize();
@@ -33,6 +40,11 @@ int main()
     
     //Actually perform the triangulation
     triangulation->set_vertices(num_points, delaunay_vertices.data());
+    
+    if (triangulation->nb_cells() == 0)
+    {
+        std::cerr << "Warning: No triangles in output. Input may be degenerate." << std::endl;
+    }
     
     for (GEO::index_t i = 0; i < triangulation->nb_cells(); i++)
     {
