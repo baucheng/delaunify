@@ -23186,7 +23186,7 @@ namespace GEO {
 
 #ifdef GEO_OS_WINDOWS
 
-namespace {
+/*namespace {
     using namespace GEO;
     
     // Emulation of pthread mutexes using Windows API
@@ -23244,7 +23244,7 @@ namespace {
         SleepConditionVariableCS(c, m, INFINITE);
         return 0;
     }
-}
+}*/
 
 
 #endif
@@ -24266,13 +24266,13 @@ namespace GEO {
 #ifdef GEO_OS_WINDOWS
            // Note: comparand and exchange parameter are swapped in Windows API
            // as compared to __sync_val_compare_and_swap !!
-            interfering_thread_ =
+            /*interfering_thread_ =
                 (thread_index_t)(_InterlockedCompareExchange8(
                     (volatile char *)(&cell_thread_[t]),
                     (char)(id() << 1),
                     (char)(NO_THREAD)
                 ));
-#else            
+#else            */
             interfering_thread_ = 
                 __sync_val_compare_and_swap(
                     &cell_thread_[t], NO_THREAD, thread_index_t(id() << 1)
