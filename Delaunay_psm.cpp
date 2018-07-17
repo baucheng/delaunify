@@ -3945,11 +3945,11 @@ namespace GEO {
     }
 
 #if 1
-#ifdef GEO_OS_WINDOWS
-#define safe_strtok strtok_s
-#else
+//#ifdef GEO_OS_WINDOWS
+//#define safe_strtok strtok_s
+//#else
 #define safe_strtok strtok_r
-#endif
+//#endif
 
     void LineInput::get_fields(const char* separators) {
         field_.resize(0);
